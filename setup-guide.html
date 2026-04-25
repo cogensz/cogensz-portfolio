@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COGENSZ Portfolio — Setup Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #0a0a0a;
+      --card:   #111111;
+      --border: #1e1e1e;
+      --accent: #ccff00;
+      --muted:  #a3a3a3;
+      --white:  #f5f5f5;
+      --sans:   'Inter', sans-serif;
+      --mono:   'JetBrains Mono', monospace;
+    }
+
+    html { background: var(--bg); }
+
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--white);
+      padding: 60px 72px;
+      max-width: 900px;
+      margin: 0 auto;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 28px;
+      margin-bottom: 48px;
+    }
+    .logo {
+      font-family: var(--sans);
+      font-weight: 900;
+      font-size: 28px;
+      letter-spacing: -0.04em;
+      color: var(--white);
+    }
+    .logo span { color: var(--accent); }
+    .header-meta {
+      text-align: right;
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.8;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── Hero block ── */
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 16px;
+      padding: 40px 44px;
+      margin-bottom: 48px;
+    }
+    .hero-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-family: var(--sans);
+      font-weight: 900;
+      font-size: 38px;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    .hero p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 500px;
+    }
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid #2a3d00;
+      background: #0f1a00;
+      border-radius: 6px;
+      padding: 7px 14px;
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: 44px; }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-label .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .section-label h2 {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--white);
+    }
+    .section-label .num {
+      font-size: 10px;
+      color: var(--muted);
+      margin-left: auto;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Prereq cards ── */
+    .prereq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .prereq-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .prereq-card .name {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .prereq-card .version {
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+    .prereq-card .link {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ── Steps ── */
+    .steps { display: flex; flex-direction: column; gap: 16px; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .step-content { flex: 1; }
+    .step-content h3 {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .step-content p {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    /* ── Code block ── */
+    .code-block {
+      background: #000;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .code-block .code-header {
+      background: #111;
+      border-bottom: 1px solid #1a1a1a;
+      padding: 7px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .code-header .dot-r { width: 8px; height: 8px; border-radius: 50%; background: #ff5f57; }
+    .code-header .dot-y { width: 8px; height: 8px; border-radius: 50%; background: #febc2e; }
+    .code-header .dot-g { width: 8px; height: 8px; border-radius: 50%; background: #28c840; }
+    .code-header .lang {
+      margin-left: auto;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #555;
+    }
+    .code-block pre {
+      padding: 16px 18px;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.9;
+      color: #ccc;
+      white-space: pre;
+    }
+    .code-block pre .cmd     { color: var(--accent); }
+    .code-block pre .comment { color: #444; }
+    .code-block pre .url     { color: #7dd3fc; }
+
+    /* ── Info banner ── */
+    .info-banner {
+      background: #0f1a00;
+      border: 1px solid #2a3d00;
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 11px;
+      color: #a8c200;
+      line-height: 1.8;
+      margin-top: 14px;
+    }
+    .info-banner strong { color: var(--accent); }
+
+    /* ── Table ── */
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--white);
+      vertical-align: top;
+    }
+    td:first-child { color: var(--accent); font-size: 11px; }
+    td:last-child  { color: var(--muted);  font-size: 11px; }
+    tr:last-child td { border-bottom: none; }
+
+    /* ── Pills ── */
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 11px;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pill .v { color: var(--accent); font-weight: 600; }
+
+    /* ── Footer ── */
+    .doc-footer {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .doc-footer .accent { color: var(--accent); }
+
+    /* ── Print ── */
+    @media print {
+      body { padding: 40px 56px; }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">COGENSZ<span>.</span></div>
+    <div class="header-meta">
+      Setup Guide<br/>
+      v1.1 — 2026<br/>
+      cogensz-portfolio
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-label">Documentation</p>
+    <h1>Portfolio Setup<br/>Guide</h1>
+    <p>
+      A step-by-step installation guide for the COGENSZ Portfolio — a high-performance,
+      cinematic portfolio built with Vite, React 19, Tailwind CSS v4, and Framer Motion.
+      Follow this guide to get the project running on your local machine in under 5 minutes.
+    </p>
+    <div class="repo-link">
+      ✦ &nbsp; github.com/cogensz/cogensz-portfolio
+    </div>
+  </div>
+
+  <!-- 01 — Tech Stack -->
+  <div class="section">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Tech Stack</h2>
+      <span class="num">01</span>
+    </div>
+    <div class="pills">
+      <div class="pill">React <span class="v">19</span></div>
+      <div class="pill">Vite <span class="v">8</span></div>
+      <div class="pill">Tailwind CSS <span class="v">v4</span></div>
+      <div class="pill">Framer Motion <span class="v">12</span></div>
+      <div class="pill">Lucide React</div>
+      <div class="pill">JetBrains Mono</div>
+      <div class="pill">Inter</div>
+    </div>
+  </div>
+
+  <!-- 02 — Prerequisites -->
+  <div class="section">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Prerequisites</h2>
+      <span class="num">02</span>
+    </div>
+    <div class="prereq-grid">
+      <div class="prereq-card">
+        <div class="name">Node.js</div>
+        <div class="version">Required: >= 18.x (LTS recommended)</div>
+        <div class="link">nodejs.org/en/download</div>
+      </div>
+      <div class="prereq-card">
+        <div class="name">npm</div>
+        <div class="version">Required: >= 9.x</div>
+        <div class="link">Bundled with Node.js</div>
+      </div>
+      <div class="prereq-card">
+        <div class="name">Git</div>
+        <div class="version">Any recent version</div>
+        <div class="link">git-scm.com</div>
+      </div>
+      <div class="prereq-card">
+        <div class="name">Code Editor</div>
+        <div class="version">VS Code recommended</div>
+        <div class="link">code.visualstudio.com</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 — Installation -->
+  <div class="section">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Installation</h2>
+      <span class="num">03</span>
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Clone the Repository</h3>
+          <p>Download the project source code from the COGENSZ portfolio repository.</p>
+          <div class="code-block">
+            <div class="code-header">
+              <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+              <span class="lang">bash</span>
+            </div>
+            <pre><span class="cmd">git clone</span> <span class="url">https://github.com/cogensz/cogensz-portfolio.git</span>
+<span class="cmd">cd</span> cogensz-portfolio</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Install Dependencies</h3>
+          <p>Install all packages defined in <code style="color:var(--accent);font-size:11px">package.json</code> — React, Framer Motion, Tailwind, and all dev tools.</p>
+          <div class="code-block">
+            <div class="code-header">
+              <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+              <span class="lang">bash</span>
+            </div>
+            <pre><span class="cmd">npm install</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Start the Development Server</h3>
+          <p>Launch Vite's hot-module-replacing dev server. Changes reflect instantly in the browser.</p>
+          <div class="code-block">
+            <div class="code-header">
+              <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+              <span class="lang">bash</span>
+            </div>
+            <pre><span class="cmd">npm run dev</span>
+
+<span class="comment"># Expected output:</span>
+  VITE v8.0.0  ready in ~300 ms
+
+  ➜  Local:   <span class="url">http://localhost:5173/</span>
+  ➜  Network: use --host to expose</pre>
+          </div>
+          <div class="info-banner">
+            ✦ &nbsp;Open <strong>http://localhost:5173</strong> in your browser. The page hot-reloads automatically on every file save — no manual refresh needed.
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Build for Production <span style="color:var(--muted);font-weight:400;font-size:11px">(optional)</span></h3>
+          <p>When ready to deploy, generate an optimised production bundle in the <code style="color:var(--accent);font-size:11px">/dist</code> folder.</p>
+          <div class="code-block">
+            <div class="code-header">
+              <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+              <span class="lang">bash</span>
+            </div>
+            <pre><span class="cmd">npm run build</span>     <span class="comment"># compile &amp; optimise → /dist</span>
+<span class="cmd">npm run preview</span>   <span class="comment"># preview the production build locally</span></pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 04 — Scripts Reference -->
+  <div class="section">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Scripts Reference</h2>
+      <span class="num">04</span>
+    </div>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+        <span class="lang">reference</span>
+      </div>
+      <table style="margin:0;border-radius:0;">
+        <thead>
+          <tr><th>Command</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>npm run dev</td><td>Start local dev server at localhost:5173</td></tr>
+          <tr><td>npm run build</td><td>Build optimised production bundle to /dist</td></tr>
+          <tr><td>npm run preview</td><td>Preview the production build locally</td></tr>
+          <tr><td>npm run lint</td><td>Run ESLint across all source files</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 05 — Environment Variables -->
+  <div class="section">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Environment Variables</h2>
+      <span class="num">05</span>
+    </div>
+    <p style="font-size:12px;color:var(--muted);line-height:1.9;margin-bottom:14px;">
+      No variables are required by default. If you extend the project with a contact form or CMS, create a <code style="color:var(--accent)">.env</code> file at the project root:
+    </p>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+        <span class="lang">.env</span>
+      </div>
+      <pre><span class="comment"># Never commit this file — it is listed in .gitignore</span>
+VITE_API_URL=<span class="url">https://your-api-endpoint.com</span>
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key</pre>
+    </div>
+    <div class="info-banner">
+      ✦ &nbsp;All Vite environment variables <strong>must</strong> be prefixed with <strong>VITE_</strong> to be exposed to the browser. Never put secret keys in client-side code.
+    </div>
+  </div>
+
+  <!-- 06 — Folder Structure -->
+  <div class="section">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Folder Structure</h2>
+      <span class="num">06</span>
+    </div>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+        <span class="lang">tree</span>
+      </div>
+      <pre>cogensz-portfolio/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx          <span class="comment"># sticky blur-glass navigation</span>
+│   │   ├── Hero.jsx            <span class="comment"># parallax full-screen hero</span>
+│   │   ├── Marquee.jsx         <span class="comment"># infinite tech-stack ticker</span>
+│   │   ├── ProjectGallery.jsx  <span class="comment"># horizontal scroll gallery</span>
+│   │   ├── About.jsx           <span class="comment"># word-reveal about section</span>
+│   │   ├── Skills.jsx          <span class="comment"># skill grid + process strip</span>
+│   │   ├── Contact.jsx         <span class="comment"># CTA contact section</span>
+│   │   ├── Footer.jsx          <span class="comment"># sticky-reveal footer</span>
+│   │   ├── ProgressBar.jsx     <span class="comment"># scroll progress bar</span>
+│   │   └── BackToTop.jsx       <span class="comment"># floating back-to-top button</span>
+│   ├── App.jsx                 <span class="comment"># root layout — assembles all sections</span>
+│   ├── main.jsx                <span class="comment"># React DOM entry point</span>
+│   └── index.css               <span class="comment"># Tailwind base + global styles</span>
+├── index.html                  <span class="comment"># HTML shell with SEO / OG tags</span>
+├── vite.config.js              <span class="comment"># Vite + Tailwind plugin config</span>
+├── .gitignore
+├── package.json
+└── README.md</pre>
+    </div>
+  </div>
+
+  <!-- 07 — Contact -->
+  <div class="section">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Contact</h2>
+      <span class="num">07</span>
+    </div>
+    <div class="prereq-grid">
+      <div class="prereq-card">
+        <div class="name">Website</div>
+        <div class="link" style="margin-top:4px;color:var(--accent)">cogensz.dev</div>
+      </div>
+      <div class="prereq-card">
+        <div class="name">Email</div>
+        <div class="link" style="margin-top:4px;color:var(--accent)">cogensz@example.com</div>
+      </div>
+      <div class="prereq-card">
+        <div class="name">Instagram</div>
+        <div class="link" style="margin-top:4px;color:var(--accent)">@cogensz</div>
+      </div>
+      <div class="prereq-card">
+        <div class="name">Twitter / X</div>
+        <div class="link" style="margin-top:4px;color:var(--accent)">@cogensz</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>COGENSZ<span class="accent">.</span> — Setup Guide v1.1</div>
+    <div>github.com/cogensz/cogensz-portfolio</div>
+  </div>
+
+</body>
+</html>
